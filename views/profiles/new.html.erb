@@ -1,0 +1,41 @@
+<% provide(:title, 'Create Profile') %>
+<h1>Create Profile</h1>
+
+<div>
+  <%= link_to "Build Profile with Facebook", "/auth/facebook" %>
+</div>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for([@user, @profile], :url => user_profile_path(@user)) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+      
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+         
+      <%= f.label :age %>
+      <%= f.text_field :age %>
+      
+      <%= f.label :gender %>
+      <%= f.text_field :gender %>
+      
+      <%= f.label :fam_stat %>
+      <%= f.text_field :fam_stat %>
+      
+      <%= f.label :religion %>
+      <%= f.text_field :religion %>
+      
+      <%= f.label :occupation %>
+      <%= f.text_field :occupation %>
+      
+      <%= f.label :education %>
+      <%= f.text_field :education %>
+      
+          
+      <%= f.submit "Create my profile", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
