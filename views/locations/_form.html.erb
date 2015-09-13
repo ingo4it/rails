@@ -1,0 +1,9 @@
+<%= form_for @location, url: user_location_path(@user, @location) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <p>
+    
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
