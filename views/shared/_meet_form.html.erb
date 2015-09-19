@@ -1,0 +1,7 @@
+<%= form_for(@meet || @user.meets.build) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "I'd like to...", :rows => 10, :cols => 60, :style => "width:auto;" %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>

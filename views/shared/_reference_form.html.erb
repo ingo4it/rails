@@ -1,0 +1,14 @@
+<%= form_for(@user.references.build) do |f| %>
+    <%= hidden_field_tag :user_id, @user.id %>
+    <%= render 'shared/error_messages', object: f.object %>
+     <div class="field">
+      <%= f.text_area :content, placeholder: "Enter reference here...", rows: 5 %>
+      <%= f.select :rating, [["Positive",Reference::POSITIVE],["Neutral",Reference::NEUTRAL],["Negative",Reference::NEGATIVE]]%>
+      <%= f.label :met_on_itsplatonic do %>
+        <%= f.check_box :met_on_itsplatonic %>
+        Met on ItsPlatonic?
+      <% end %>
+     </div>
+    <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
+

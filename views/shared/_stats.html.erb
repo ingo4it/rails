@@ -1,0 +1,16 @@
+<% @user ||= current_user %>
+<div class="stats">
+  <a href="<%= contacting_user_path(@user) %>">
+    <strong id="contacting" class="stat">
+      <%= @user.contacted_users.count %>
+    </strong>
+    Favorite Users
+  </a>
+  <a href="<%= contacters_user_path(@user) %>">
+    <strong id="contacters" class="stat">
+      <%= @user.contacters.count %>
+    </strong>
+    Favorited by
+  </a>
+</div>
+
