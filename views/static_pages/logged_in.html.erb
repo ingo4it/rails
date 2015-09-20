@@ -1,0 +1,302 @@
+  <div class='left-side-home-page pull-left'>
+    <div class='home-profile-block'>
+      <div class='pull-left image'>
+        <div class='img'>
+          <%= link_to(image_tag(current_user.profile.picture), current_user) %>
+        </div>
+      </div>
+      <div class='pull-left'>
+        <div class='explain-profile-text'>
+          You have made
+          <a href="#">4 friends</a>
+          through
+          <a href="#">9 messages</a>
+          and
+          <a href="#">6 meets</a>!
+        </div>
+        <div class='pull-left'>
+          <div class='progress progress-striped'>
+            <div class='bar' style='width: 100%'></div>
+          </div>
+          <div class='profile-completeness'>
+            Congratulations! Your profile is complete!
+            <!-- Your profile is 75% complete
+            <a href="#">click to update</a> -->
+          </div>
+        </div>
+        <div class='pull-right'>
+          <div class='invites-button'>
+            <a href="#">
+              <span class='orange-text'>3</span>
+              <span class='underline'>invites left</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+      <div class='clear'></div>
+    </div>
+    <div class='want-to-do-something-block'>
+      <div class='title'>
+        Want to do something fun & make a new friend?
+      </div>
+      <div class='explain'>
+        Post your idea & we'll show it to members with similar interests. When they want to join you, they'll send a request with a date, time, and location that you can approve or deny. It's that easy!
+      </div>
+      <div class='meet-me-input-block'>
+        <div class='meet-me-input-form'>
+          <%= form_for(@meet, :class => 'form-horizontal') do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+            <%= f.label :content, 'MeetMe:' %>
+            <%= f.text_field :content, placeholder: "describe your activity here" %>
+            <a href="#">need inspiration?</a>
+            <input name='picture' src='/assets/go_button.png' type='image' />
+            <div class='clear'></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='right-side-home-page pull-right'>
+    <div class='quick-search-block'>
+      <div class='title'>
+        <span class='orange-text'>uick</span>
+        <span class='blue-text'>Search</span>
+      </div>
+      <div class='quick-search-form'>
+        <%= form_tag users_path, method: :get, class: 'form-horizontal' do %>
+          <div class='control-group'>
+            <label class='control-label'>Gender:</label>
+            <div class='controls'>
+              <%= select_tag :gender, options_for_select([['Either', nil], ['Male', 'male'], ['Female', 'female']]), :class => 'medium' %>
+            </div>
+          </div>
+          <div class='control-group'>
+            <label class='control-label'>Age:</label>
+            <div class='controls'>
+              <%= fields_for :age_range do |a| %>
+                <%= a.select :end, options_for_select([20, 35, 50]), {}, :class => 'small' %>
+                to
+                <%= a.select :start, options_for_select([35, 50, 65]), {}, :class => 'small' %>
+              <% end %>
+            </div>
+          </div>
+          <div class='control-group'>
+            <label class='control-label'>Education:</label>
+            <div class='controls'>
+              <%= select_tag :education, options_for_select([['any', nil], ['high', 'high']]), :class => 'large' %>
+            </div>
+          </div>
+          <div class='control-group'>
+            <label class='control-label'>Occupation:</label>
+            <div class='controls'>
+              <%= select_tag :occupation, options_for_select([['any', nil]]), :class => 'large' %>
+            </div>
+          </div>
+          <input class='start-searching' type='submit' value='search now!'/>
+          <div class='advanced-search-link'><%= link_to 'advanced search >>', users_path %></div>
+        <%- end %>
+      </div>
+    </div>
+  </div>
+  <div class='clear'></div>
+  <div class='full-home-page-block'>
+    <div class='left-side-home-page pull-left'>
+      <div class='home-tabs-block'>
+        <ul class='nav nav-tabs' id='homeTab'>
+          <li class='active'>
+            <a data-toggle="tab" href="#topMatches">Top Matches</a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#topMeets">Top Meets</a>
+          </li>
+        </ul>
+        <div class='tab-content' id='homeTabContent'>
+          <div class='tab-pane active' id='topMatches'>
+            <%= render :partial => 'users/result_item', :collection => @top_matches %>
+          </div>
+          <div class='tab-pane' id='topMeets'>
+            <%= render :partial => 'meets/result_item', :collection => @top_meets %>
+          </div>
+        </div>
+        <!-- <div class='sort-block'>
+          <select>
+            <option>Newest</option>
+          </select>
+        </div> -->
+      </div>
+      <div class='pages'>
+        <div class='pull-right'>
+          <div class='see-next-btn pull-left'>
+            <a href="#">See next 6</a>
+          </div>
+          <div class='clear'></div>
+        </div>
+        <div class='clear'></div>
+      </div>
+    </div>
+    <div class='right-side-home-page pull-right'>
+      <div class='statistics-block'>
+        <div class='title'>
+          <span class='orange-text'>Your</span>
+          <span class='blue-text'>Statistics</span>
+          <span>
+            <u><%= link_to "view profile >>", current_user %></u>
+          </span>
+        </div>
+        <div class='stat-table'>
+          <table>
+            <tr>
+              <td>
+                Points
+                <br />
+                <a href="#">79</a>
+              </td>
+              <td>
+                Rank on site
+                <br />
+                <a href="#">1483</a>
+              </td>
+              <td>
+                <div class='pull-left'>
+                  Badges
+                  <br />
+                  Earned
+                </div>
+                <div class='pull-right'>
+                  <a href="#"><img src="/assets/badges_earned_icon.png" /></a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class='more-information-link'>
+          <a href="#">More about points and badges >></a>
+        </div>
+        <div class='divider-line'></div>
+        <div class='home-rank-block'>
+          <div class='title'>
+            Rank among Facebook friends!
+          </div>
+          <div class='rank-table'>
+            <table>
+              <tr>
+                <td>1</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Lauren</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">188</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Rebeca</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">172</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>You</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">159</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Frank</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">141</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Ted</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">137</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Mihai</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">132</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Remus</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">125</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Sabrina</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">120</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Xavier</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">111</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td class='image'><a href="#"><img src="/assets/profile_thumbnail.png" /></a></td>
+                <td>Shawn</td>
+                <td class='point'>
+                  <a class="orange-text" href="#">106</a>
+                  <br />
+                  <span>points</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class='more-information-link'>
+          <a href="#">Browse ranking page >></a>
+        </div>
+        <div class='divider-line'></div>
+        <div class='pages'>
+          <div class='pull-right'>
+            <div class='go-top-link'>
+              <a href="#">Go To Top</a>
+            </div>
+          </div>
+          <div class='clear'></div>
+        </div>
+        <div class='clear'></div>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </div>
