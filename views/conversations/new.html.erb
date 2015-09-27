@@ -1,0 +1,17 @@
+<h1>Write a message to <%= @recipient.name %></h1>
+
+<%= form_tag conversations_path, method: :post do %>
+  <%= hidden_field_tag :recipient_id, params[:recipient_id] %>
+
+  <div class="form-row">
+    <%= label_tag :message_subject, "Subject" %>
+    <%= text_field_tag :message_subject, params[:suggested_subject] %>
+  </div>
+  <div class="form-row">
+    <%= label_tag :message_subject, "Message" %>
+    <%= text_area_tag :message_body, nil, :placeholder => params[:suggested_body] || "" %>
+  </div>
+  <div class="form-row">
+    <%= submit_tag "Send", class: "btn" %>
+  </div>
+<%- end %>

@@ -1,0 +1,56 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Recipients</th>
+      <th>Subject</th>
+      <th>#</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr class="<%= 'is-unread' if @conversation.is_unread?(current_user) %>">
+        <td>
+          <%- @conversation.recipients.delete_if{|r| r == current_user}.each do |recipient| %>
+            <%= link_to recipient.name, recipient %>
+          <%- end %>
+        </td>
+        <td>
+          <%= @conversation.subject %>
+        </td>
+        <td>
+          <%= @conversation.count_messages %>
+        </td>
+        <td>
+          <%= l(@conversation.updated_at, format: :short) %>
+        </td>
+      </tr>
+
+        <%- @conversation.messages.order(:created_at).each do |message| %>
+          <tr>
+            <td colspan="4">
+              <% if message.sender == current_user %>
+                You
+              <% else %>
+                <%= link_to message.sender.name, message.sender %>
+              <% end %>
+              on
+              <%= l(message.created_at, format: :short) %> :
+              <div class="well well-small">
+                <%= simple_format message.body %>
+              </div>
+            </td>
+          </tr>
+        <%- end %>
+
+        <tr>
+          <td colspan="4">
+            <%= form_tag reply_conversation_path(@conversation), method: :put do %>
+              <%= text_area_tag :reply_body %>
+              <%= submit_tag "Reply", class: "btn" %>
+            <%- end %>
+          </td>
+        </tr>
+  </tbody>
+</table>
+<%= link_to '<< Back', {:action => :index}, :class => 'btn pull-right' %>
+<div class="clear"></div>

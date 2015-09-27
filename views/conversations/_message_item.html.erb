@@ -1,0 +1,46 @@
+<div class='message-item'>
+  <div class='col1'>
+    <input type='checkbox' />
+  </div>
+  <div class='col2'>
+    <div class='pull-left'>
+      <div class='image'>
+        <%= image_tag message_item.messages.last.sender.profile.picture %>
+      </div>
+    </div>
+    <div class='pull-left'>
+      <div class='name'>
+        <%= link_to message_item.messages.last.sender.name, message_item.messages.last.sender %>
+      </div>
+      <div class='who-emailed'>
+        <% if message_item.messages.last.sender == current_user %>
+          You emailed
+          <% if message_item.messages.last.recipients.count == 1 && message_item.messages.last.recipients.first.gender == 'Male' %>
+            him
+          <% elsif message_item.messages.last.recipients.count == 1 && message_item.messages.last.recipients.first.gender == 'Female' %>
+            her
+          <% else %>
+            them
+          <% end %>
+        <% else %>
+          <% if message_item.messages.last.sender.profile.gender == 'Male' %>
+            He
+          <% elsif message_item.messages.last.sender.profile.gender == 'Female' %>
+            She
+          <% else %>
+            They
+          <% end %>
+          emailed you
+        <% end %>
+      </div>
+    </div>
+    <div class='clear'></div>
+  </div>
+  <div class='col3'>
+    <%= link_to message_item.subject, message_item %>
+  </div>
+  <div class='col4'>
+    <%= time_ago_in_words(message_item.messages.last.created_at) %> ago
+  </div>
+  <div class='clear'></div>
+</div>

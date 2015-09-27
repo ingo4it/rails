@@ -1,0 +1,156 @@
+<div class='full-page-block'>
+  <div class='pull-left'>
+    <div class='inbox-messages-block'>
+      <div class='title'>
+        <div class='pull-left'>
+          MESSAGES
+        </div>
+        <div class='pull-right'>
+          <a href="#">Compose Email</a>
+        </div>
+        <div class='clear'></div>
+      </div>
+      <div class='messages-category-block'>
+        <ul>
+          <li class='active'>
+            <div class='pull-left'>
+             <a href="#"><span class='blue-text'>Inbox</span>
+              <span>(<%= current_user.mailbox.conversations.unread(current_user).count %>)</span>
+              </a>
+
+            </div>
+            <div class='pull-right'>
+                              <a href="#"><span class='blue-text'>0 New</span>
+              </a>
+
+            </div>
+            <div class='clear'></div>
+          </li>
+          <li>
+            <div class='pull-left'>
+             <a href="#"><span class='blue-text'>Filtered Emails</span>
+              <span>(2)</span>
+              </a>
+
+            </div>
+            <div class='pull-right'>
+              <a class="orange-link" href="#">Settings</a>
+            </div>
+            <div class='clear'></div>
+          </li>
+          <li>
+           <a href="#"><span class='blue-text'>Drafts</span>
+            <span>(0)</span>
+            </a>
+
+          </li>
+          <li>
+           <a href="#"><span class='blue-text'>Sent</span>
+            <span>(0)</span>
+            </a>
+
+          </li>
+          <li>
+            <div class='pull-left'>
+             <a href="#"><span class='blue-text'>Trash</span>
+              <span>(0)</span>
+              </a>
+
+            </div>
+            <div class='pull-right'>
+              <a class="orange-link" href="#">Empty Trash</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class='inbox-connection-block'>
+      <div class='title'>
+        <div class='pull-left'>
+          CONNECTIONS
+        </div>
+        <div class='pull-right'>
+          <a href="#">See All</a>
+        </div>
+        <div class='clear'></div>
+      </div>
+      <div class='email-connection-block'>
+        <div class='text'>Click on a image to email a connection</div>
+        <div class='connect-images'>
+          <div class='connect-item'>
+            <a href="#"><img src="/assets/ava1.png" /></a>
+          </div>
+          <div class='connect-item'>
+            <a href="#"><img src="/assets/ava2.png" /></a>
+          </div>
+          <div class='connect-item'>
+            <a href="#"><img src="/assets/ava1.png" /></a>
+          </div>
+          <div class='connect-item'>
+            <a href="#"><img src="/assets/ava3.png" /></a>
+          </div>
+          <div class='connect-item'>
+            <a href="#"><img src="/assets/ava1.png" /></a>
+          </div>
+          <div class='connect-item'>
+            <a href="#"><img src="/assets/ava3.png" /></a>
+          </div>
+          <div class='connect-item'>
+            <a href="#"><img src="/assets/ava1.png" /></a>
+          </div>
+          <div class='connect-item'>
+            <a href="#"><img src="/assets/ava4.png" /></a>
+          </div>
+          <div class='clear'></div>
+        </div>
+      </div>
+      <div class='email-info-list'>
+        <ul>
+          <li><a href="#">Email Settings and Help</a></li>
+          <li><a href="#">Email Help</a></li>
+          <li><a href="#">Update Email Address</a></li>
+          <li><a href="#">Prevent Missing Emails</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class='pull-right'>
+    <div class='preview-message-block'>
+      <div class='title'>
+        <div class='pull-left'>
+          Inbox (17 new)
+        </div>
+        <div class='pull-right'>
+		<a class="delete" href="#">Delete</a>
+          <a href="#">« Prev</a>
+          <a href="#">Next »</a>
+        </div>
+        <div class='clear'></div>
+      </div>
+      <div class='headers'>
+        <div class='col1'>
+          <input type='checkbox' />
+        </div>
+        <div class='col2'>
+          Sender
+        </div>
+        <div class='col3'>
+          Subject
+        </div>
+        <div class='col4'>
+          Received
+        </div>
+        <div class='clear'></div>
+      </div>
+      <div class='list-of-messages'>
+        <%= render :partial => 'message_item', :collection => @conversations %>
+      </div>
+      <% if @conversations.empty? %>
+      <div>
+        <h4 style="text-align: center;">No new messages :(<br>Why don't you contact someone?</h4>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class='clear'></div>
+</div>
