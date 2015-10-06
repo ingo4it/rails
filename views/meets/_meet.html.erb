@@ -1,0 +1,21 @@
+
+<li>
+  <div class="meet-item-block">
+    <div class="text">
+      <%= meet.content %><br />
+      <!-- <small><%= "Posted #{time_ago_in_words(meet.created_at)} ago." %></small> -->
+    </div>
+    <div class="request-button">
+      <% if current_user?(meet.user) %>
+        <%= link_to "delete", meet, method: :delete, data: { confirm: "Are you sure?" }, title: meet.content %>
+      <% else %>
+        <% if current_user.meet_requests.where(meet_id: meet.id).any? %>
+          You requested this.
+        <% else %>
+          <%= link_to "REQUEST TO GO", meet_meet_requests_path(meet), method: :post %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="clear" />
+  </div>
+</li>

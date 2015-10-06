@@ -1,0 +1,70 @@
+
+<div class='top-block pull-left'>
+  <div class='text'>
+    <span class='orange-text'>Browse meets</span><span class='dark-blue-text'> in your area:</span>
+  </div>
+</div>
+<div class='help-button pull-right'>
+  <a class="btn" href="#">What is this?</a>
+</div>
+<div class='clear'></div>
+<div class='filter-block'>
+  <form class='filter-block-form form-inline'>
+    <div class='label-line'>
+      <label class='large'>Type of Meet</label>
+      <label class='average'>Miles</label>
+      <label class='small'></label>
+      <label class='average'>Gender</label>
+      <label class='small'>Age</label>
+      <label class='small'></label>
+    </div>
+    <div class='inputs-line'>
+      <select class='large'>
+        <option>Friendship</option>
+        <option>Go for a walk</option>
+        <option>PenPal</option>
+      </select>
+      <input class='small' type='text' />
+      of
+      <input class='small' type='text' />
+      <select class='average'>
+        <option>Any</option>
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+      <input class='small' type='text' />
+      to
+      <input class='small' type='text' />
+      <input id='meet-filter' type='submit' value='Filter' />
+    </div>
+  </form>
+</div>
+<div class='find-meets-block'>
+  <div class='search-params'>
+    <%= form_tag meets_path, :method => :get, class: 'search-form form-inline' do %>
+    <form>
+      <input name="query" placeholder='Search meets by keyword' type='text' />
+      <input id='search-go' type='submit' value='Go&nbsp;>>' />
+      <select>
+        <option>Sort by Newest</option>
+        <!-- <option>Sort by age</option> -->
+      </select>
+    <% end %>
+  </div>
+  <%= render :partial => 'result_item', :collection => @meets %>
+  <div class='pages'>
+    <div class='pull-right'>
+      <%= will_paginate %>
+      <!-- <div class='go-top-link pull-left'>
+        <a href="#">Go To Top</a>
+      </div>
+      <div class='see-next-btn pull-left'>
+        <a href="#">See next 6</a>
+      </div> -->
+      <div class='clear'></div>
+    </div>
+    <div class='clear'></div>
+  </div>
+</div>
+
+
